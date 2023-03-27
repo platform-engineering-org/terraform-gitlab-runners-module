@@ -1,0 +1,6 @@
+.pulumi/
+host
+id_ecdsa
+id_rsa
+password
+username

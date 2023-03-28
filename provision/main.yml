@@ -1,0 +1,52 @@
+- name: main
+  hosts: localhost
+
+  tasks:
+    - name: Spin crc cloud
+      containers.podman.podman_container:
+        name: crc-cloud
+        image: quay.io/crcont/crc-cloud:v0.0.2
+        detach: false
+        rm: true
+        state: started
+        command:
+          - create
+          - aws
+          - --project-name
+          - "crc-ocp412"
+          - --backed-url
+          - "file:///workspace"
+          - --output
+          - "/workspace"
+          - --aws-ami-id
+          - "ami-019669c0960dbcf14"
+          - --pullsecret-filepath
+          - "/pullsecret/pull-secret.txt"
+          - --key-filepath
+          - "/workspace/id_ecdsa"
+        volume:
+          - "{{ lookup('ansible.builtin.env', 'PWD') }}:/workspace:z"
+          - "{{ lookup('ansible.builtin.env', 'HOME') }}/Downloads/pull-secret.txt:/pullsecret/pull-secret.txt:z"
+          - "{{ lookup('ansible.builtin.env', 'HOME') }}/.aws:/root/.aws:z"
+      tags:
+        - up
+
+    - name: Tear down crc cloud
+      containers.podman.podman_container:
+        name: crc-cloud
+        image: quay.io/crcont/crc-cloud:v0.0.2
+        detach: false
+        rm: true
+        state: started
+        command:
+          - destroy
+          - --project-name
+          - "crc-ocp412"
+          - --backed-url
+          - "file:///workspace"
+          - --provider
+          - "aws"
+        volume:
+          - "{{ lookup('ansible.builtin.env', 'PWD') }}:/workspace:z"
+          - "{{ lookup('ansible.builtin.env', 'HOME') }}/.aws:/root/.aws:z"
+      tags: down

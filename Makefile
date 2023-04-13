@@ -3,8 +3,9 @@
 depend:
 	ansible-galaxy install -r ./provision/requirements.yml
 
-up: depend
-	ansible-playbook ./provision/main.yml --tags up
+up:
+	crc-cloud create aws --project-name "crc-ocp412" --backed-url file:///. --aws-ami-id "ami-019669c0960dbcf14" --pullsecret-filepath pull-secret.txt --key-filepath id_ecdsa
+#	ansible-playbook ./provision/main.yml
 
-down: depend
-	ansible-playbook ./provision/main.yml --tags down
+down:
+	crc-cloud destroy --project-name "crc-ocp412" --backed-url file:///. --provider "aws"

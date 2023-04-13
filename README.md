@@ -13,6 +13,17 @@ Install the [Dev Containers extension][3] and check its
 2. Choose "Dev Container: Open Folder in Container" via the command palette
 3. The VS Code [integrated terminal][5] is now running in the container and can
    be used to run additional commands
+4. Spin environment:
+
+```shell
+make up
+```
+
+5. Destory environment:
+
+```shell
+make down
+```
 
 [1]: https://code.visualstudio.com/
 [2]: https://code.visualstudio.com/docs/devcontainers/containers

@@ -1,0 +1,24 @@
+---
+- name: Gitlab CI Runners | AWS | S3 Bucket
+  amazon.aws.s3_bucket:
+    name: "{{ aws_s3_bucket }}"
+    region: "{{ aws_s3_region }}"
+    state: present
+
+- name: Gitlab CI Runners | AWS | Get aws_access_key_id value
+  ansible.builtin.command:
+    cmd: aws configure get aws_access_key_id
+  register: aws_access_key_id
+
+- name: Gitlab CI Runners | AWS | Keep aws_access_key_id value
+  ansible.builtin.set_fact:
+    aws_access_key_id: aws_access_key_id.stdout
+
+- name: Gitlab CI Runners | AWS | Get aws_secret_access_key value
+  ansible.builtin.command:
+    cmd: aws configure get aws_secret_access_key
+  register: aws_secret_access_key
+
+- name: Gitlab CI Runners | AWS | Keep aws_secret_access_key value
+  ansible.builtin.set_fact:
+    aws_secret_access_key: aws_secret_access_key.stdout

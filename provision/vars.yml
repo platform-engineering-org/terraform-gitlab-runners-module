@@ -1,0 +1,11 @@
+---
+validate_certs:         no
+ocp_ns:                 "auto-pe-runners"
+
+runner_token:          "{{ lookup('env', 'RUNNER_TOKEN') }}"
+gitlab_instance:        "https://gitlab.com/"
+
+aws_access_key_id:     "{{ lookup('env', 'AWS_ACCESS_KEY_ID')}}"
+aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY')}}"
+aws_s3_region:          "eu-west-2"
+aws_s3_bucket:          "auto-pe-gcr-workspaces"

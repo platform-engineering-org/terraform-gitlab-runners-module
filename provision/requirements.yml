@@ -3,6 +3,3 @@ collections:
   - name: kubernetes.core
     version: 2.4.0
     type: galaxy
-  - name: containers.podman
-    version: 1.10.1
-    type: galaxy

@@ -1,0 +1,6 @@
+plugin: kubernetes.core.k8s
+connections:
+  - host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    username: kubeadmin
+    password: "{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../password') }}"
+    validate_certs: false

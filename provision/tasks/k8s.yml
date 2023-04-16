@@ -1,0 +1,207 @@
+---
+- name: Gitlab CI Runner | k8s | Verify | Dependencies
+  community.general.python_requirements_info:
+    dependencies:
+      - openshift
+      - kubernetes
+
+- name: Gitlab CI Runner | k8s | api_key
+  kubernetes.core.k8s_auth:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    username: kubeadmin
+    password: "{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../password') }}"
+  register: k8s_auth_results
+
+- name: Gitlab CI Runner | k8s | Apply | Namespace
+  kubernetes.core.k8s:
+    name: "{{ ocp_ns }}"
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    definition:
+      api_version: v1
+      kind: Namespace
+      state: present
+
+- name: Gitlab CI Runner | k8s | Apply | Runner config.toml
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: gitlab-runner-config-toml
+        namespace: "{{ ocp_ns }}"
+      data:
+        config.toml: |
+          [[runners]]
+            [runners.kubernetes]
+              pull_policy = ["always"]
+
+- name: Gitlab CI Runner | k8s | Runner Secrets
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: "gitlab-runner-secret"
+        namespace: "{{ ocp_ns }}"
+      type: Opaque
+      data:
+        runner-registration-token: "{{ runner_token | b64encode }}"
+
+- name: Gitlab CI Runners | k8s | Apply | AWS Secrets
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: "gitlab-runner-aws-secret"
+        namespace: "{{ ocp_ns }}"
+      type: Opaque
+      data:
+        accesskey: "{{ aws_access_key_id | b64encode }}"
+        secretkey: "{{ aws_secret_access_key | b64encode }}"
+
+- name: Gitlab CI Runner | k8s | Apply | Operator Subscription
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: gitlab-runner-operator
+        namespace: openshift-operators
+      spec:
+        channel: stable
+        installPlanApproval: Automatic
+        name: gitlab-runner-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+        startingCSV: gitlab-runner-operator.v1.11.0
+
+- name: Gitlab CI Runner | k8s | Wait | Subscription
+  kubernetes.core.k8s_info:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    kind: Subscription
+    wait: true
+    name: gitlab-runner-operator
+    namespace: openshift-operators
+    wait_sleep: 10
+    wait_timeout: 360
+
+- name: Gitlab CI Runner | k8s | Apply | Reset Subscription Install Approval to Manual
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: gitlab-runner-operator
+        namespace: "{{ ocp_ns }}"
+      spec:
+        channel: stable
+        installPlanApproval: Manual # Prevent automated (possibly breaking) updates on new operator releases
+        name: gitlab-runner-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+        startingCSV: gitlab-runner-operator.v1.10.0
+
+- name: Gitlab CI Runner | k8s | Apply | Role
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      kind: Role
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: gitlab-runner-anyuid
+        namespace: "{{ ocp_ns }}"
+      rules:
+        - verbs:
+            - use
+          apiGroups:
+            - security.openshift.io
+          resources:
+            - securitycontextconstraints
+          resourceNames:
+            - anyuid
+
+- name: Gitlab CI Runner | k8s | Apply | RoleBinding to gitlab-runner-sa SA
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      kind: RoleBinding
+      apiVersion: rbac.authorization.k8s.io/v1
+      metadata:
+        name: gitlab-runner-sa-anyuid-role-binding
+        namespace: "{{ ocp_ns }}"
+      subjects:
+        - kind: ServiceAccount
+          name: "gitlab-runner-sa"
+          namespace: "{{ ocp_ns }}"
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: gitlab-runner-anyuid
+
+- name: Gitlab CI Runner | k8s | Wait | Runner Readiness
+  kubernetes.core.k8s_info:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    api_version: apps.gitlab.com/v1beta2
+    kind: Runner
+    wait: yes
+    wait_timeout: 300
+
+- name: Gitlab CI Runner | k8s | Create Runner
+  kubernetes.core.k8s:
+    validate_certs: "{{ validate_certs }}"
+    host: "https://api.{{ lookup('ansible.builtin.file', '{{ playbook_dir }}/../host') }}.nip.io:6443"
+    api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+    state: present
+    definition:
+      apiVersion: apps.gitlab.com/v1beta2
+      kind: Runner
+      metadata:
+        name: gitlab-runner
+        namespace: "{{ ocp_ns }}"
+      spec:
+        gitlabUrl: "{{ gitlab_instance }}"
+        imagePullPolicy: Always
+        buildImage: alpine
+        token: "gitlab-runner-secret"
+        s3:
+          bucket: "{{ aws_s3_bucket }}"
+          credentials: "gitlab-runner-aws-secret"
+          location: "{{ aws_s3_region }}"
+        tags: "docker"
+        runUntagged: true
+        config: gitlab-runner-config-toml
+        concurrent: 50

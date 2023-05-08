@@ -1,4 +1,4 @@
-.PHONY: depend up down
+.PHONY: depend up down login
 
 depend:
 	ansible-galaxy install -r ./provision/requirements.yml
@@ -9,3 +9,6 @@ up:
 
 down:
 	crc-cloud destroy --project-name "crc-ocp412" --backed-url file:///. --provider "aws"
+
+login:
+	oc login $(shell cat ./host):6443 --insecure-skip-tls-verify=true --username=kubeadmin --password="$(shell cat ./password)"

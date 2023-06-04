@@ -1,4 +1,4 @@
-ansible==7.6.0
+ansible==8.0.0
 jsonpatch==1.32
 kubernetes==26.1.0
 PyYAML==6.0

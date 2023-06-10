@@ -1,15 +1,19 @@
 name: CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
-
+  up:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.5.2
+      - name: Run make up in dev container
+        uses: devcontainers/ci@v0.3.1900000329
+        env:
+          GITLAB_URL: ${{ secrets.GITLAB_URL }}
+          RUNNER_REGISTRATION_TOKEN: ${{ secrets.RUNNER_REGISTRATION_TOKEN }}
+        with:
+          runCmd: make up-ci

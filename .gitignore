@@ -1,8 +1,1 @@
-.pulumi/
-host
-id_ecdsa
-id_rsa
-password
-username
-pull-secret.txt
-Pulumi.yaml
+values.yaml

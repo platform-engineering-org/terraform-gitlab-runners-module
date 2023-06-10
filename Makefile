@@ -1,14 +1,10 @@
-.PHONY: depend up down login
-
-depend:
-	ansible-galaxy install -r ./provision/requirements.yml
+.PHONY: up down
 
 up:
-	crc-cloud create aws --project-name "crc-ocp412" --backed-url file:///. --aws-ami-id "ami-019669c0960dbcf14" --pullsecret-filepath pull-secret.txt --key-filepath id_ecdsa
-#	ansible-playbook ./provision/main.yml
+	minikube start
+	helm repo add gitlab https://charts.gitlab.io
+	helm install --namespace default gitlab-runner -f values.yaml gitlab/gitlab-runner
 
 down:
-	crc-cloud destroy --project-name "crc-ocp412" --backed-url file:///. --provider "aws"
-
-login:
-	oc login $(shell cat ./host):6443 --insecure-skip-tls-verify=true --username=kubeadmin --password="$(shell cat ./password)"
+	helm uninstall --namespace default gitlab-runner
+	minikube stop

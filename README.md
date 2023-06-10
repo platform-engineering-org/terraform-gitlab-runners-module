@@ -5,9 +5,10 @@
 | Badge                   | Description          | Service      |
 | ----------------------- | -------------------- | ------------ |
 | ![Renovate][1]          | Dependencies         | Renovate     |
-| ![Pre-commit][2]        | Static quality gates | pre-commit   |
 | ![Devcontainer][3]      | Local DEV Env        | devcontainer |
-| ![GitHub Codespaces][4] | Remove DEV Env       | codespaces   |
+
+<!-- | ![Pre-commit][2]        | Static quality gates | pre-commit   | -->
+<!-- | ![GitHub Codespaces][4] | Remove DEV Env       | codespaces   | -->
 
 ## Dev Environment
 

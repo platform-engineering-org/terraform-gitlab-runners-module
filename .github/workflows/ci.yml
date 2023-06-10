@@ -9,7 +9,7 @@ jobs:
   up:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.3
       - name: Run make up in dev container
         uses: devcontainers/ci@v0.3.1900000329
         with:

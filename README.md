@@ -1,32 +1,29 @@
 # gitlab-ci-runners
 
+## What is enabled
+
+| Badge                   | Description          | Service      |
+| ----------------------- | -------------------- | ------------ |
+| ![Renovate][1]          | Dependencies         | Renovate     |
+| ![Pre-commit][2]        | Static quality gates | pre-commit   |
+| ![Devcontainer][3]      | Local DEV Env        | devcontainer |
+| ![GitHub Codespaces][4] | Remove DEV Env       | codespaces   |
+
 ## Dev Environment
 
-### VS Code Remote Development
-
-If you are using [VSCode][1] you can work in a [development container][2].
-
-Install the [Dev Containers extension][3] and check its
-[system requirements][4]
-
-1. Open the repository folder in VSCode
-2. Choose "Dev Container: Open Folder in Container" via the command palette
-3. The VS Code [integrated terminal][5] is now running in the container and can
-   be used to run additional commands
-4. Spin environment:
+Spin environment:
 
 ```shell
 make up
 ```
 
-5. Destory environment:
+Destory environment:
 
 ```shell
 make down
 ```
 
-[1]: https://code.visualstudio.com/
-[2]: https://code.visualstudio.com/docs/devcontainers/containers
-[3]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-[4]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers#system-requirements
-[5]: https://code.visualstudio.com/docs/terminal/basics
+[1]: https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovate
+[2]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit
+[3]: https://img.shields.io/static/v1?label=devcontainer&message=enabled&logo=visualstudiocode&color=007ACC&logoColor=007ACC
+[4]: https://img.shields.io/static/v1?label=codespaces&message=enabled&logo=github

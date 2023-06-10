@@ -1,0 +1,15 @@
+---
+name: pre_commit
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/setup-python@v4.6.1
+      - uses: pre-commit/action@v3.0.0

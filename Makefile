@@ -1,4 +1,4 @@
-.PHONY: infra app up down
+.PHONY: infra app up down all clean test
 
 infra:
 	minikube start

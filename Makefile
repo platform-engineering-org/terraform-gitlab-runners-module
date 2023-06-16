@@ -1,13 +1,11 @@
-.PHONY: infra app up down all clean test
+.PHONY: up down all clean test
 
-infra:
+up:
 	minikube start
+	[ -n ${CI} ] && echo ${RUNNER_REGISTRATION_TOKEN} > resources/.env
+	kubectl apply -k resources/
 	helm repo add gitlab https://charts.gitlab.io
-
-app:
 	helm install --namespace default gitlab-runner -f values.yaml gitlab/gitlab-runner
-
-up: infra app
 
 down:
 	helm uninstall --namespace default gitlab-runner

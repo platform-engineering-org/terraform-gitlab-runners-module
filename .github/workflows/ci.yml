@@ -13,4 +13,7 @@ jobs:
       - name: Run make up in dev container
         uses: devcontainers/ci@v0.3.1900000329
         with:
-          runCmd: make infra && helm install --namespace default gitlab-runner --set gitlabUrl=${{ secrets.GITLAB_URL }},runnerRegistrationToken="${{ secrets.RUNNER_REGISTRATION_TOKEN }}" gitlab/gitlab-runner && make down
+          runCmd: make up down
+          env: |
+            CI=true
+            RUNNER_REGISTRATION_TOKEN=${{ secrets.RUNNER_REGISTRATION_TOKEN }}

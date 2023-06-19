@@ -3,10 +3,9 @@
   "extends": [
     "config:base",
     ":enablePreCommit",
-    "group:allNonMajor"
-  ],
-  "automerge": false,
-  "schedule": [
-    "every weekend"
+    "group:allNonMajor",
+    "regexManagers:dockerfileVersions",
+    "schedule:weekly",
+    "docker:pinDigests"
   ]
 }

@@ -1,3 +1,4 @@
 gitlabUrl: https://gitlab.com
 runners:
   secret: gitlab-runner-secret
+  tags: "dev"

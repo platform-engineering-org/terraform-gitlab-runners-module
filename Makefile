@@ -5,8 +5,8 @@ up:
 	[ -n ${CI} ] && echo ${RUNNER_REGISTRATION_TOKEN} > resources/.env
 	kubectl apply -k resources/
 	helm repo add gitlab https://charts.gitlab.io
-	helm install --namespace default gitlab-runner -f values.yaml gitlab/gitlab-runner
+	helm install --namespace default gitlab-runner -f values.yaml gitlab/gitlab-runner --version v0.53.2
 
 down:
-	helm uninstall --namespace default gitlab-runner
+	helm delete --namespace default gitlab-runner
 	minikube stop

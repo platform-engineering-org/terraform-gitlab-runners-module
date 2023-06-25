@@ -1,6 +1,6 @@
 {
-    "name": "gcr-devenv",
-    "image":"mcr.microsoft.com/devcontainers/base:debian-11",
+    "name": "gitlab-runner",
+    "dockerFile": "Dockerfile",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2.2.0": {},
         "ghcr.io/devcontainers/features/kubectl-helm-minikube:1.1.4": {
@@ -12,7 +12,11 @@
             "version": "3.2.2"
         },
         "ghcr.io/devcontainers-contrib/features/pre-commit:2.0.15": {
-			"version": "3.3.3"
-		}
-    }
+            "version": "3.3.3"
+        }
+    },
+    "forwardPorts": [
+        80,
+        443
+    ]
 }

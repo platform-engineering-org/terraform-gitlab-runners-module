@@ -1,4 +1,10 @@
-gitlabUrl: https://gitlab.com
-runners:
-  secret: gitlab-runner-secret
-  tags: "dev"
+global:
+  edition: ce
+  domain: example.com
+
+certmanager-issuer:
+  email: user@example.com
+
+gitlab-runner:
+  install: true
+  register: true

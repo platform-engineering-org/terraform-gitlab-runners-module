@@ -14,6 +14,3 @@ jobs:
         uses: devcontainers/ci@v0.3.1900000329
         with:
           runCmd: make up down
-          env: |
-            CI=true
-            RUNNER_REGISTRATION_TOKEN=${{ secrets.RUNNER_REGISTRATION_TOKEN }}

@@ -2,11 +2,10 @@
 
 up:
 	minikube start
-	[ -n ${CI} ] && echo ${RUNNER_REGISTRATION_TOKEN} > resources/.env
-	kubectl apply -k resources/
+	kubectl create namespace gitlab
 	helm repo add gitlab https://charts.gitlab.io
-	helm install --namespace default gitlab-runner -f values.yaml gitlab/gitlab-runner --version v0.53.2
+	helm repo update
+	helm install gitlab gitlab/gitlab --namespace gitlab --values values.yaml --version v7.1.0
 
 down:
-	helm delete --namespace default gitlab-runner
-	minikube stop
+	minikube delete

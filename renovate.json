@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    ":enablePreCommit",
-    "group:allNonMajor",
-    "regexManagers:dockerfileVersions",
-    "schedule:weekly",
-    "docker:pinDigests"
+    "github>platform-engineering-org/.github"
   ]
 }

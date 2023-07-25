@@ -1,1 +1,9 @@
-FROM mcr.microsoft.com/devcontainers/base:debian-11@sha256:628547ebe81167cad8aca96c9c88c3ad868e8cc8e34d394b740b8bb8f50a452f
+FROM mcr.microsoft.com/devcontainers/python:3.11
+
+USER vscode
+
+WORKDIR /app
+
+COPY requirements.txt ./
+
+RUN  pip install -r requirements.txt

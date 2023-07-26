@@ -22,13 +22,41 @@ Run the dev container with the [VSCode extention][6] or the [devcontainer cli][7
 make up
 ```
 
+Wait until all pods are up and running. Before that you won't be able to access gitlab.
+Sometimes it takes 15-20 mins.
+
+You can monitor the pods status via:
+
+```shell
+kubectl get pods -w
+```
+
+Once the pods are running, run:
+
+```shell
+minikube ip
+```
+
+Open this URL in your browser, use the IP from the previous command:
+
+```shell
+https://gitlab.[minikube ip].nip.io/
+```
+
+Get the password to login:
+
+```shell
+kubectl get secret gitlab-gitlab-initial-root-password \
+-ojsonpath='{.data.password}' | base64 --decode ; echo
+```
+
 Destory environment:
 
 ```shell
 make down
 ```
 
-Stop the dev container
+* Note: The deployment is not yet accessible when running in a dev-container.
 
 [1]: https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovate
 [2]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit

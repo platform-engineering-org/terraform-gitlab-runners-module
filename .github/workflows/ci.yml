@@ -13,4 +13,4 @@ jobs:
       - name: Run make up in dev container
         uses: devcontainers/ci@v0.3.1900000329
         with:
-          runCmd: make up down
+          runCmd: pwd

@@ -1,4 +1,7 @@
-.PHONY: up down all clean test
+.PHONY: up down all clean test init plan apply destroy
+
+include .env
+export
 
 up:
 	minikube start \
@@ -16,3 +19,15 @@ up:
 	-f values.yaml
 down:
 	minikube delete
+
+init:
+	terraform -chdir=infra init -backend-config=backend.hcl
+
+plan:
+	dotenv run terraform -chdir=infra plan
+
+apply:
+	dotenv run terraform -chdir=infra apply
+
+destroy:
+	dotenv run terraform -chdir=infra destroy

@@ -1,0 +1,5 @@
+bucket         = "<s3 bucket name>"
+key            = "<key name>"
+region         = "<s3 region>"
+dynamodb_table = "<dynamodb table>"
+profile        = "<AWS profile>"

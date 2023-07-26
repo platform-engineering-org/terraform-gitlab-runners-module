@@ -1,1 +1,9 @@
-.env
+*.env*
+*.tfvars
+*.lock.hcl
+*.tfstate
+.terraform
+.vscode/
+*.backup
+backend.hcl
+*.zip

@@ -1,0 +1,2 @@
+pip==23.2
+python-dotenv[cli]==1.0.0

@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
     "name": "gitlab-runner",
     "dockerFile": "Dockerfile",
     "features": {
@@ -6,7 +7,7 @@
         "ghcr.io/devcontainers/features/kubectl-helm-minikube:1.1.4": {
             "version": "1.27.3",
             "helm": "3.12.1",
-            "minikube": "1.30.1"
+            "minikube": "1.31.1"
         },
         "ghcr.io/devcontainers/features/ruby:1.1.0": {
             "version": "3.2.2"
@@ -24,5 +25,8 @@
     ],
     "mounts": [
         "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached"
-    ]
+    ],
+    "hostRequirements": {
+        "memory": "8192"
+    }
 }

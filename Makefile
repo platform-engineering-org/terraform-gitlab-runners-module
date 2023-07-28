@@ -4,9 +4,7 @@ include .env
 export
 
 up:
-	minikube start \
-    --cpus 4 \
-    --memory 8192
+	minikube start --cpus 4 --memory 8192
 	minikube addons enable ingress
 	minikube addons enable dashboard
 	kubectl create namespace gitlab

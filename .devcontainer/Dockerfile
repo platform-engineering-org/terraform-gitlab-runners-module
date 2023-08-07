@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/python:3.11@sha256:902177832d72d27f3e39e2a5651a093fba5d371ae0e13070045eaa1e4615e6d7
+FROM mcr.microsoft.com/devcontainers/python:3.11@sha256:95ccb1dbdc6476ac207f6b00963bf38849a7f93c7c2bbabd28ac2c073aa83801
 
 USER vscode
 

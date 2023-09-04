@@ -49,7 +49,7 @@ module "vpc_endpoints" {
 
 module "gitlab-runner" {
   source  = "cattle-ops/gitlab-runner/aws"
-  version = "6.5.1"
+  version = "6.5.2"
 
   aws_region  = var.aws_region
   environment = var.environment

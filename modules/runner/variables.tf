@@ -17,19 +17,19 @@ variable "base_url" {
 variable "aws_region" {
   description = "AWS region."
   type        = string
-  default     = "eu-west-1"
+  default     = "eu-west-2"
 }
 
 variable "environment" {
   description = "A name that identifies the environment, will used as prefix and for tagging."
   type        = string
-  default     = "runners-default"
+  default     = "dev"
 }
 
 variable "runner_name" {
   description = "Name of the runner, will be used in the runner config.toml"
   type        = string
-  default     = "default-auto"
+  default     = "pe-runner"
 }
 
 variable "gitlab_url" {
@@ -38,7 +38,12 @@ variable "gitlab_url" {
   default     = "https://gitlab.com"
 }
 
-variable "registration_token" {
+variable "registration_token_runner_1" {
+  description = "Registration token for the runner."
+  type        = string
+}
+
+variable "registration_token_runner_2" {
   description = "Registration token for the runner."
   type        = string
 }

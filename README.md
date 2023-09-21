@@ -8,9 +8,31 @@
 | ![Pre-commit][2]        | Static quality gates | pre-commit   |
 | ![Devcontainer][3]      | Local DEV Env        | devcontainer |
 
-<!-- | ![GitHub Codespaces][4] | Remove DEV Env       | codespaces   | -->
+## IaC Terraform & Terragrunt
 
-## Dev Environment
+Implemented in devcontainer
+
+### DEV environment
+
+```shell
+make tf/init
+make tf/plan
+make tf/apply
+make tf/destroy
+```
+
+### PROD environment
+
+```shell
+make tf/init ENV=prod
+make tf/plan ENV=prod
+make tf/apply ENV=prod
+make tf/destroy ENV=prod
+```
+
+## IaC Minikube
+
+### Dev Environment
 
 The development environment is implemented with [devcontainer][5].
 

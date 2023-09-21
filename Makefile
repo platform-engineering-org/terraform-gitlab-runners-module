@@ -1,8 +1,29 @@
-.PHONY: up down all clean test init plan apply destroy
+.PHONY: all clean test
 
-include .env
-export
+ENV := dev
+TERRAGRUNT_CMD = cd live/${ENV} && terragrunt run-all --terragrunt-non-interactive
 
+.PHONY: tf/init
+tf/init:
+	${TERRAGRUNT_CMD} init -backend-config=backend.hcl
+
+.PHONY: tf/plan
+tf/plan:
+	${TERRAGRUNT_CMD} plan -out tfplan
+
+.PHONY: tf/graph
+tf/graph:
+	${TERRAGRUNT_CMD} graph
+
+.PHONY: tf/apply
+tf/apply:
+	${TERRAGRUNT_CMD} apply
+
+.PHONY: tf/destroy
+tf/destroy:
+	${TERRAGRUNT_CMD} destroy -terragrunt-log-level debug
+
+.PHONY: up
 up:
 	minikube start \
     --cpus 4 \
@@ -17,17 +38,7 @@ up:
 	--set global.hosts.domain=$$(minikube ip).nip.io \
 	--set global.hosts.externalIP=$$(minikube ip) \
 	-f values.yaml
+
+.PHONY: down
 down:
 	minikube delete
-
-init:
-	terraform -chdir=infra init -backend-config=backend.hcl
-
-plan:
-	dotenv run terraform -chdir=infra plan
-
-apply:
-	dotenv run terraform -chdir=infra apply
-
-destroy:
-	dotenv run terraform -chdir=infra destroy

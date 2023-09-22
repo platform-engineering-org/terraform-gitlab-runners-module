@@ -131,6 +131,10 @@ module "runner-instance-1" {
     max_price = "on-demand-price"
   }
 
+  runner_worker_docker_machine_instance = {
+      types = ["t3.micro"]
+  }
+
   runner_networking = {
     allow_incoming_ping_security_group_ids = [data.aws_security_group.default.id]
   }
@@ -222,6 +226,10 @@ module "runner-instance-2" {
 
   runner_worker_docker_machine_instance_spot = {
       max_price = "on-demand-price"
+  }
+
+  runner_worker_docker_machine_instance = {
+      types = ["t3.micro"]
   }
 
   runner_networking = {

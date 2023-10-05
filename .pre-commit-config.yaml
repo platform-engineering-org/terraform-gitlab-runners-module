@@ -27,7 +27,3 @@ repos:
     rev: 36.107.1
     hooks:
       - id: renovate-config-validator
-  - repo: https://github.com/mrtazz/checkmake
-    rev: 0.2.2
-    hooks:
-      - id: checkmake

@@ -4,5 +4,3 @@
 .terraform
 .vscode/
 *.backup
-backend.hcl
-.terragrunt-cache/

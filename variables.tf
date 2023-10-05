@@ -1,3 +1,27 @@
+variable "aws_region_1" {
+  description = "AWS region."
+  type        = string
+  default     = "eu-west-2"
+}
+
+variable "aws_profile_1" {
+  description = "AWS profile."
+  type        = string
+  default     = "default"
+}
+
+variable "aws_region_2" {
+  description = "AWS region"
+  type        = string
+  default     = "eu-west-2"
+}
+
+variable "aws_profile_2" {
+  description = "AWS profile"
+  type        = string
+  default     = "default"
+}
+
 variable "token" {
   type        = string
   description = "Gitlab token"
@@ -12,12 +36,6 @@ variable "insecure" {
 variable "base_url" {
   type        = string
   description = "gitlab api end point"
-}
-
-variable "aws_region" {
-  description = "AWS region."
-  type        = string
-  default     = "eu-west-2"
 }
 
 variable "environment" {
@@ -48,16 +66,15 @@ variable "registration_token_runner_2" {
   type        = string
 }
 
+variable "registration_token_runner_3" {
+  description = "Registration token for the runner."
+  type        = string
+}
+
 variable "timezone" {
   description = "Name of the timezone that the runner will be used in."
   type        = string
   default     = "Europe/Amsterdam"
-}
-
-variable "aws_profile" {
-  description = "AWS profile."
-  type        = string
-  default     = "default"
 }
 
 variable "project" {
@@ -69,4 +86,10 @@ variable "project" {
 variable "user" {
   description = "User name"
   type        = string
+}
+
+variable "docker-machine-types" {
+  description = "Gitlab runner docker machine type"
+  type        = list(string)
+  default     = ["t3.micro"]
 }

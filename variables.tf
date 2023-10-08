@@ -1,7 +1,6 @@
 variable "aws_region" {
   description = "AWS region."
   type        = string
-  default     = "eu-west-2"
 }
 
 variable "aws_profile" {
@@ -19,11 +18,13 @@ variable "token" {
 variable "insecure" {
   type        = string
   description = "Do not verify certifcate if true"
+  default     = true
 }
 
 variable "base_url" {
   type        = string
   description = "gitlab api end point"
+  default     = "https://gitlab.com/api/v4/"
 }
 
 variable "environment" {
@@ -47,6 +48,7 @@ variable "gitlab_url" {
 variable "registration_token_runner" {
   description = "Registration token for the runner."
   type        = string
+  sensitive   = true
 }
 
 variable "timezone" {

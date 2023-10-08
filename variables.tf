@@ -1,23 +1,11 @@
-variable "aws_region_1" {
+variable "aws_region" {
   description = "AWS region."
   type        = string
   default     = "eu-west-2"
 }
 
-variable "aws_profile_1" {
+variable "aws_profile" {
   description = "AWS profile."
-  type        = string
-  default     = "default"
-}
-
-variable "aws_region_2" {
-  description = "AWS region"
-  type        = string
-  default     = "eu-west-2"
-}
-
-variable "aws_profile_2" {
-  description = "AWS profile"
   type        = string
   default     = "default"
 }
@@ -56,17 +44,7 @@ variable "gitlab_url" {
   default     = "https://gitlab.com"
 }
 
-variable "registration_token_runner_1" {
-  description = "Registration token for the runner."
-  type        = string
-}
-
-variable "registration_token_runner_2" {
-  description = "Registration token for the runner."
-  type        = string
-}
-
-variable "registration_token_runner_3" {
+variable "registration_token_runner" {
   description = "Registration token for the runner."
   type        = string
 }

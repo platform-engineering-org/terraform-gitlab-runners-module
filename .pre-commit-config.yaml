@@ -4,7 +4,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -20,10 +20,10 @@ repos:
       - id: check-json
       - id: check-yaml
   - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.12.0
+    rev: v0.13.0
     hooks:
       - id: markdownlint
   - repo: https://github.com/maxbrunet/pre-commit-renovate
-    rev: 36.107.1
+    rev: 37.8.1
     hooks:
       - id: renovate-config-validator

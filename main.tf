@@ -121,7 +121,8 @@ module "runner-instance" {
   }
 
   runner_gitlab = {
-    url = var.gitlab_url
+    url            = var.gitlab_url
+    runner_version = var.runner_version
   }
 
   runner_worker_docker_machine_instance_spot = {

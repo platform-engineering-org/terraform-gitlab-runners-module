@@ -130,7 +130,8 @@ module "runner-instance" {
   }
 
   runner_worker_docker_machine_instance = {
-    types = var.docker-machine-types
+    types     = var.docker-machine-types
+    root_size = var.runners_root_size
   }
 
   runner_networking = {

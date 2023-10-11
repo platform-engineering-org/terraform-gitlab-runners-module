@@ -79,3 +79,9 @@ variable "runner_version" {
   type        = string
   default     = "15.8.2"
 }
+
+variable "runners_root_size" {
+  description = "Gitlab runner root filesystem size"
+  type        = number
+  default     = 8
+}

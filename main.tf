@@ -68,9 +68,9 @@ module "runner-instance" {
   }
 
   runner_worker_cache = {
-    create        = "true"
-    versioning    = "true"
-    shared        = "true"
+    create     = "true"
+    versioning = "true"
+    shared     = "true"
   }
 
   tags = {

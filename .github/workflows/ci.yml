@@ -1,0 +1,28 @@
+---
+name: CI
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify_module:
+    name: Verify module
+    strategy:
+      matrix:
+        terraform: [ 1.6.1 ]
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:${{ matrix.terraform }}
+    steps:
+      - uses: actions/checkout@v4.0.0
+      - run: terraform init -get -backend=false -input=false
+      - run: terraform fmt -recursive -check=true -write=false
+      - run: terraform validate

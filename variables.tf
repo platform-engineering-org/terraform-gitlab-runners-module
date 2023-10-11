@@ -73,3 +73,9 @@ variable "docker-machine-types" {
   type        = list(string)
   default     = ["t3.micro"]
 }
+
+variable "runner_version" {
+  description = "Gitlab runner version"
+  type        = string
+  default     = "15.8.2"
+}

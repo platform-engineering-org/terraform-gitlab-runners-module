@@ -60,7 +60,7 @@ module "runner-instance" {
 
   runner_gitlab_registration_config = {
     registration_token = var.registration_token_runner
-    tag_list           = "platform-engineering,renovate"
+    tag_list           = "platform-engineering"
     description        = "Docker Machine"
     locked_to_project  = "true"
     run_untagged       = "false"

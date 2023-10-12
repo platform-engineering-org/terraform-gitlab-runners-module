@@ -71,7 +71,6 @@ module "runner-instance" {
     create     = "true"
     versioning = "true"
     shared     = "true"
-    bucket     = var.bucket
   }
 
   tags = {
@@ -142,7 +141,7 @@ module "runner-instance" {
   runner_gitlab_token_secure_parameter_store = "runner-token"
   runner_sentry_secure_parameter_store_name  = "sentry-dsn"
   runner_role = {
-    role_profile_name = "runner"
+    role_profile_name = var.role_profile_name
   }
   runner_terminate_ec2_lifecycle_hook_name = "terminate-instances"
 }

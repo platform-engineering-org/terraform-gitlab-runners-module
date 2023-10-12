@@ -86,8 +86,8 @@ variable "runners_root_size" {
   default     = 8
 }
 
-variable "bucket" {
-  description = "Runner worker cache bucket name"
+variable "role_profile_name" {
+  description = "IAM Role Profile Name"
   type        = string
-  default     = "dev"
+  default     = "dev-gitlab-runners"
 }

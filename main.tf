@@ -71,6 +71,7 @@ module "runner-instance" {
     create     = "true"
     versioning = "true"
     shared     = "true"
+    bucket     = var.bucket
   }
 
   tags = {

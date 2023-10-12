@@ -2,5 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>platform-engineering-org/.github"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "matchStringsStrategy": "combination",
+      "fileMatch": ["variables.tf"],
+      "matchStrings": [
+        "variable\\s*\"runner_version\"",
+        "description",
+        "type",
+        "default\\s*=\\s*\"(?<currentValue>.*)\""
+      ],
+      "depNameTemplate": "gitlab-org/gitlab-runner",
+      "datasourceTemplate": "gitlab-releases"
+    }
   ]
 }

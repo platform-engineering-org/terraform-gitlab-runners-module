@@ -17,5 +17,11 @@
       "depNameTemplate": "gitlab-org/gitlab-runner",
       "datasourceTemplate": "gitlab-releases"
     }
+  ],
+  "packageRules": [
+    {
+      "packageNames": ["gitlab-org/gitlab-runner"],
+      "extractVersion": "^v(?<version>.*)$"
+    }
   ]
 }

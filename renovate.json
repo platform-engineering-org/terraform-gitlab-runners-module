@@ -7,7 +7,9 @@
     {
       "customType": "regex",
       "matchStringsStrategy": "combination",
-      "fileMatch": ["variables.tf"],
+      "fileMatch": [
+        "variables.tf"
+      ],
       "matchStrings": [
         "variable\\s*\"runner_version\"",
         "description",
@@ -20,7 +22,9 @@
   ],
   "packageRules": [
     {
-      "packageNames": ["gitlab-org/gitlab-runner"],
+      "matchPackageNames": [
+        "gitlab-org/gitlab-runner"
+      ],
       "extractVersion": "^v(?<version>.*)$"
     }
   ]

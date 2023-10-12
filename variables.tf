@@ -85,3 +85,9 @@ variable "runners_root_size" {
   type        = number
   default     = 8
 }
+
+variable "bucket" {
+  description = "Runner worker cache bucket name"
+  type        = string
+  default     = "dev"
+}

@@ -77,7 +77,7 @@ variable "docker-machine-types" {
 variable "runner_version" {
   description = "Gitlab runner version"
   type        = string
-  default     = "15.8.2"
+  default     = "16.4.1"
 }
 
 variable "runners_root_size" {

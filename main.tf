@@ -51,7 +51,7 @@ module "vpc_endpoints" {
 
 module "runner-instance" {
   source  = "cattle-ops/gitlab-runner/aws"
-  version = "7.3.1"
+  version = "7.4.0"
 
   environment = var.environment
 

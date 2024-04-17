@@ -91,3 +91,9 @@ variable "role_profile_name" {
   type        = string
   default     = "dev-gitlab-runners"
 }
+
+variable "runner_instance_type" {
+  description = "Runner Instance Type"
+  type        = string
+  default     = "t3.medium"
+}

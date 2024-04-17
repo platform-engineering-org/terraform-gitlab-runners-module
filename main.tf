@@ -49,11 +49,16 @@ module "vpc_endpoints" {
   }
 }
 
+resource "random_id" "unique_prefix" {
+  byte_length = 4
+}
+
 module "runner-instance" {
   source  = "cattle-ops/gitlab-runner/aws"
   version = "7.5.0"
 
-  environment = var.environment
+  environment       = var.environment
+  iam_object_prefix = random_id.unique_prefix.hex
 
   vpc_id    = module.vpc.vpc_id
   subnet_id = element(module.vpc.private_subnets, 0)
@@ -112,7 +117,7 @@ module "runner-instance" {
     name                        = "pe-workers"
     name_prefix                 = "${var.runner_name}"
     ssm_access                  = true
-    type                        = "t3.medium"
+    type                        = var.runner_instance_type
   }
 
   runner_cloudwatch = {

@@ -114,7 +114,7 @@ module "runner-instance" {
 
   runner_instance = {
     collect_autoscaling_metrics = ["GroupDesiredCapacity", "GroupInServiceCapacity"]
-    name                        = "pe-workers"
+    name                        = "pe-runners"
     name_prefix                 = "${var.runner_name}"
     ssm_access                  = true
     type                        = var.runner_instance_type
@@ -135,7 +135,7 @@ module "runner-instance" {
   }
 
   runner_worker_docker_machine_instance = {
-    types     = var.docker-machine-types
+    types     = var.runner_worker_docker_machine_instance_types
     root_size = var.runners_root_size
   }
 

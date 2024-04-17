@@ -68,10 +68,10 @@ variable "user" {
   type        = string
 }
 
-variable "docker-machine-types" {
+variable "runner_worker_docker_machine_instance_types" {
   description = "Gitlab runner docker machine type"
   type        = list(string)
-  default     = ["t3.micro"]
+  default     = ["t3.medium"]
 }
 
 variable "runner_version" {

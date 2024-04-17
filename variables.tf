@@ -86,12 +86,6 @@ variable "runners_root_size" {
   default     = 8
 }
 
-variable "role_profile_name" {
-  description = "IAM Role Profile Name"
-  type        = string
-  default     = "dev-gitlab-runners"
-}
-
 variable "runner_instance_type" {
   description = "Runner Instance Type"
   type        = string

@@ -63,6 +63,9 @@ module "runner-instance" {
   vpc_id    = module.vpc.vpc_id
   subnet_id = element(module.vpc.private_subnets, 0)
 
+  runner_ami_filter = var.runner_ami_filter
+  runner_worker_docker_machine_ami_filter = var.runner_worker_docker_machine_ami_filter
+
   runner_gitlab_registration_config = {
     registration_token = var.registration_token_runner
     tag_list           = "platform-engineering"

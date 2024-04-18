@@ -65,6 +65,7 @@ module "runner-instance" {
 
   runner_ami_filter = var.runner_ami_filter
   runner_worker_docker_machine_ami_filter = var.runner_worker_docker_machine_ami_filter
+  runner_worker_docker_machine_ami_owners = var.runner_worker_docker_machine_ami_owners
 
   runner_gitlab_registration_config = {
     registration_token = var.registration_token_runner

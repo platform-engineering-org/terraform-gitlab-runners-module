@@ -91,3 +91,12 @@ variable "runner_instance_type" {
   type        = string
   default     = "t3.medium"
 }
+
+variable "runner_worker_docker_machine_ami_filter" {
+  description = "List of maps used to create the AMI filter for the Runner Worker."
+  type        = map(list(string))
+
+  default = {
+    name = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}

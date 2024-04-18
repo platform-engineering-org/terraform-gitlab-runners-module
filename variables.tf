@@ -92,6 +92,15 @@ variable "runner_instance_type" {
   default     = "t3.medium"
 }
 
+variable "runner_ami_filter" {
+  description = "List of maps used to create the AMI filter for the Runner AMI. Must resolve to an Amazon Linux 1 or 2 image."
+  type        = map(list(string))
+
+  default = {
+    name = ["amzn2-ami-hvm-2.*-x86_64-ebs"]
+  }
+}
+
 variable "runner_worker_docker_machine_ami_filter" {
   description = "List of maps used to create the AMI filter for the Runner Worker."
   type        = map(list(string))

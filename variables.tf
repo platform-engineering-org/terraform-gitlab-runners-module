@@ -109,3 +109,11 @@ variable "runner_worker_docker_machine_ami_filter" {
     name = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 }
+
+variable "runner_worker_docker_machine_ami_owners" {
+  description = "The list of owners used to select the AMI of the Runner Worker."
+  type        = list(string)
+
+  # Canonical
+  default = ["099720109477"]
+}

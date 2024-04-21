@@ -80,12 +80,6 @@ variable "runner_version" {
   default     = "16.4.1"
 }
 
-variable "runners_root_size" {
-  description = "Gitlab runner root filesystem size"
-  type        = number
-  default     = 8
-}
-
 variable "runner_instance_type" {
   description = "Runner Instance Type"
   type        = string
@@ -113,7 +107,11 @@ variable "runner_worker_docker_machine_ami_filter" {
 variable "runner_worker_docker_machine_ami_owners" {
   description = "The list of owners used to select the AMI of the Runner Worker."
   type        = list(string)
+  default     = ["099720109477"]
+}
 
-  # Canonical
-  default = ["099720109477"]
+variable "runner_worker_docker_machine_instance_root_size" {
+  description = "The size of the root volume for the Runner Worker"
+  type        = number
+  default     = 8
 }

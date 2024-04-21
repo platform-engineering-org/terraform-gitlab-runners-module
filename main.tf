@@ -63,7 +63,7 @@ module "runner-instance" {
   vpc_id    = module.vpc.vpc_id
   subnet_id = element(module.vpc.private_subnets, 0)
 
-  runner_ami_filter = var.runner_ami_filter
+  runner_ami_filter                       = var.runner_ami_filter
   runner_worker_docker_machine_ami_filter = var.runner_worker_docker_machine_ami_filter
   runner_worker_docker_machine_ami_owners = var.runner_worker_docker_machine_ami_owners
 
@@ -140,7 +140,7 @@ module "runner-instance" {
 
   runner_worker_docker_machine_instance = {
     types     = var.runner_worker_docker_machine_instance_types
-    root_size = var.runners_root_size
+    root_size = var.runner_worker_docker_machine_instance_root_size
   }
 
   runner_networking = {

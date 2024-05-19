@@ -15,17 +15,6 @@
       "depNameTemplate": "gitlab-org/gitlab-runner",
       "datasourceTemplate": "gitlab-releases",
       "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "description": "Update terraform",
-      "fileMatch": [".devcontainer/devcontainer.json"],
-      "matchStrings": [
-        "\\s*\"version\":\\s*\"(?<currentValue>.*?)\" // renovate: packageName=hashicorp/terraform"
-      ],
-      "depNameTemplate": "hashicorp/terraform",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ]
 }

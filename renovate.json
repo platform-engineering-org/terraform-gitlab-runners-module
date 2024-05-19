@@ -10,8 +10,9 @@
         "variables.tf"
       ],
       "matchStrings": [
-        "\\s*default\\s*=\\s*\"(?<currentValue>.*)\"\\s*//\\s*renovate:\\s*packageName=(?<packageName>.*)\\s*"
+        "\\s*default\\s*=\\s*\"(?<currentValue>.*)\"\\s*//\\s*renovate:\\s*packageName=gitlab-org/gitlab-runner\\s*"
       ],
+      "depNameTemplate": "gitlab-org/gitlab-runner",
       "datasourceTemplate": "gitlab-releases",
       "extractVersionTemplate": "^v?(?<version>.*)$"
     }

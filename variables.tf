@@ -74,12 +74,6 @@ variable "runner_worker_docker_machine_instance_types" {
   default     = ["t3.medium"]
 }
 
-variable "runner_version" {
-  description = "Gitlab runner version"
-  type        = string
-  default     = "16.4.1"
-}
-
 variable "runner_instance_type" {
   description = "Runner Instance Type"
   type        = string
@@ -114,4 +108,10 @@ variable "runner_worker_docker_machine_instance_root_size" {
   description = "The size of the root volume for the Runner Worker"
   type        = number
   default     = 8
+}
+
+variable "runner_version" {
+  description = "Gitlab runner version"
+  type        = string
+  default     = "16.4.1"
 }

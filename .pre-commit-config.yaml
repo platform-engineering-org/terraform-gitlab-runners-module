@@ -17,7 +17,7 @@ repos:
           - "main"
       - id: check-symlinks
       - id: check-added-large-files
-      - id: check-json
+      - id: check-json5
       - id: check-yaml
   - repo: https://github.com/markdownlint/markdownlint
     rev: v0.13.0

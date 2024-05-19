@@ -17,8 +17,11 @@ repos:
           - "main"
       - id: check-symlinks
       - id: check-added-large-files
-      - id: check-json5
       - id: check-yaml
+  - repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+      - id: check-json5
   - repo: https://github.com/markdownlint/markdownlint
     rev: v0.13.0
     hooks:

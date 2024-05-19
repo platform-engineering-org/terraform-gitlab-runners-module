@@ -9,7 +9,7 @@ data "aws_security_group" "default" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.7.1"
+  version = "5.8.1"
 
   name = "vpc-${var.environment}"
   cidr = "10.0.0.0/16"
@@ -31,7 +31,7 @@ module "vpc" {
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "5.7.1"
+  version = "5.8.1"
 
   vpc_id = module.vpc.vpc_id
 
@@ -55,7 +55,7 @@ resource "random_id" "unique_prefix" {
 
 module "runner-instance" {
   source  = "cattle-ops/gitlab-runner/aws"
-  version = "7.5.0"
+  version = "7.6.1"
 
   environment       = var.environment
   iam_object_prefix = random_id.unique_prefix.hex

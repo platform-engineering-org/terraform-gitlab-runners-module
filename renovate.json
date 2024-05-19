@@ -6,26 +6,14 @@
   "customManagers": [
     {
       "customType": "regex",
-      "matchStringsStrategy": "combination",
       "fileMatch": [
         "variables.tf"
       ],
       "matchStrings": [
-        "variable\\s*\"runner_version\"\\s*{\\s*//",
-        "description\\s*=\\s*\"Gitlab runner version\"\\s*//",
-        "type\\s*=\\s*string\\s*//",
-        "default\\s*=\\s*\"(?<currentValue>.*)\"\\s*//"
+        "\\s*default\\s*=\\s*\"(?<currentValue>.*)\"\\s*//\\s*renovate:\\s*packageName=(?<packageName>.*)\\s*"
       ],
-      "depNameTemplate": "gitlab-org/gitlab-runner",
-      "datasourceTemplate": "gitlab-releases"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "gitlab-org/gitlab-runner"
-      ],
-      "extractVersion": "^v(?<version>.*)$"
+      "datasourceTemplate": "gitlab-releases",
+      "extractVersionTemplate": "^v?(?<version>.*)$"
     }
   ]
 }

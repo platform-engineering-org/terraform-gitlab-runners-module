@@ -124,6 +124,10 @@ module "runner-instance" {
     type                        = var.runner_instance_type
   }
 
+  runner_worker = {
+    ssm_access = true
+  }
+
   runner_cloudwatch = {
     enable         = "true"
     log_group_name = "${var.runner_name}"

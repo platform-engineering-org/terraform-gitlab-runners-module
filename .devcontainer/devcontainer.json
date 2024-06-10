@@ -3,7 +3,7 @@
     "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
     "features": {
         "ghcr.io/devcontainers/features/terraform:1.3.6": {
-            "version": "1.8.4" // renovate: packageName=hashicorp/terraform
+            "version": "1.8.5" // renovate: packageName=hashicorp/terraform
         }
     }
 }

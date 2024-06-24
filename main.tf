@@ -68,12 +68,13 @@ module "runner-instance" {
   runner_worker_docker_machine_ami_owners = var.runner_worker_docker_machine_ami_owners
 
   runner_gitlab_registration_config = {
-    registration_token = var.registration_token_runner
-    tag_list           = "platform-engineering"
-    description        = "Docker Machine"
-    locked_to_project  = "true"
-    run_untagged       = "false"
-    maximum_timeout    = "3600"
+    type              = "group"
+    group_id          = var.gitlab_group_id
+    tag_list          = "platform-engineering"
+    description       = "Docker Machine"
+    locked_to_project = "true"
+    run_untagged      = "false"
+    maximum_timeout   = "3600"
   }
 
   runner_worker_cache = {
@@ -134,8 +135,9 @@ module "runner-instance" {
   }
 
   runner_gitlab = {
-    url            = var.gitlab_url
-    runner_version = var.runner_version
+    url                                      = var.gitlab_url
+    runner_version                           = var.runner_version
+    access_token_secure_parameter_store_name = var.access_token_secure_parameter_store_name
   }
 
   runner_worker_docker_machine_instance_spot = {

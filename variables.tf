@@ -45,8 +45,8 @@ variable "gitlab_url" {
   default     = "https://gitlab.com"
 }
 
-variable "registration_token_runner" {
-  description = "Registration token for the runner."
+variable "access_token_secure_parameter_store_name" {
+  description = "Runner Gitlab Access Token SSM Parameter Name"
   type        = string
   sensitive   = true
 }
@@ -114,4 +114,9 @@ variable "runner_version" {
   description = "Gitlab runner version"
   type        = string
   default     = "17.0.0" // renovate: packageName=gitlab-org/gitlab-runner
+}
+
+variable "gitlab_group_id" {
+  description = "Gitlab group id"
+  type        = string
 }

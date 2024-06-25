@@ -70,7 +70,7 @@ module "runner-instance" {
   runner_gitlab_registration_config = {
     type              = "group"
     group_id          = var.gitlab_group_id
-    tag_list          = "platform-engineering"
+    tag_list          = var.tag_list
     description       = "Docker Machine"
     locked_to_project = "true"
     run_untagged      = "false"

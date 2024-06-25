@@ -120,3 +120,9 @@ variable "gitlab_group_id" {
   description = "Gitlab group id"
   type        = string
 }
+
+variable "tag_list" {
+  description = "Tag for the agent runner"
+  type        = string
+  default     = "platform-engineering"
+}

@@ -81,6 +81,7 @@ module "runner-instance" {
     create     = "true"
     versioning = "true"
     shared     = "true"
+    cache_bucket_prefix = random_id.unique_prefix.hex
   }
 
   tags = {

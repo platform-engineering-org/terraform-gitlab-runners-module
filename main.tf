@@ -147,6 +147,7 @@ module "runner-instance" {
   runner_worker_docker_machine_instance = {
     types     = var.runner_worker_docker_machine_instance_types
     root_size = var.runner_worker_docker_machine_instance_root_size
+    max_price = "on-demand-price"
   }
 
   runner_networking = {

@@ -126,3 +126,9 @@ variable "tag_list" {
   type        = string
   default     = "platform-engineering"
 }
+
+variable "enable" {
+  description = "Enable spot instances for the Runner Worker"
+  type        = bool
+  default     = true
+}

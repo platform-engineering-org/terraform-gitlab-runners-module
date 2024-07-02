@@ -4,7 +4,7 @@ data "aws_availability_zones" "available" {
 
 data "aws_security_group" "default" {
   name   = "default"
-  vpc_id = module.vpc.vpc_id
+  vpc_id = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
 }
 
 module "vpc" {
@@ -13,6 +13,8 @@ module "vpc" {
 
   name = "vpc-${var.environment}"
   cidr = "10.0.0.0/16"
+
+  create_vpc = var.vpc_id == null ? true : false
 
   azs                     = [data.aws_availability_zones.available.names[0]]
   private_subnets         = ["10.0.1.0/24"]
@@ -33,7 +35,7 @@ module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
   version = "5.8.1"
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
 
   endpoints = {
     s3 = {
@@ -60,7 +62,7 @@ module "runner-instance" {
   environment       = var.environment
   iam_object_prefix = random_id.unique_prefix.hex
 
-  vpc_id    = module.vpc.vpc_id
+  vpc_id    = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
   subnet_id = element(module.vpc.private_subnets, 0)
 
   runner_ami_filter                       = var.runner_ami_filter
@@ -145,8 +147,9 @@ module "runner-instance" {
   }
 
   runner_worker_docker_machine_instance = {
-    types     = var.runner_worker_docker_machine_instance_types
-    root_size = var.runner_worker_docker_machine_instance_root_size
+    types      = var.runner_worker_docker_machine_instance_types
+    root_size  = var.runner_worker_docker_machine_instance_root_size
+    subnet_ids = var.runner_worker_docker_machine_instance_subnet_ids
   }
 
   runner_networking = {

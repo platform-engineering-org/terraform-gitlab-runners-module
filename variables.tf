@@ -1,3 +1,15 @@
+variable "vpc_id" {
+  description = "The VPC used for the runner and runner workers."
+  type        = string
+  default     = null
+}
+
+variable "subnet_id" {
+  description = "The subnet used for the runner and runner workers."
+  type        = string
+  default     = null
+}
+
 variable "aws_region" {
   description = "AWS region."
   type        = string

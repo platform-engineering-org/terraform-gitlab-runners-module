@@ -62,8 +62,8 @@ module "runner-instance" {
   environment       = var.environment
   iam_object_prefix = random_id.unique_prefix.hex
 
+  subnet_id = var.subnet_id == null ? element(module.vpc.private_subnets, 0) : var.subnet_id
   vpc_id    = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
-  subnet_id = element(module.vpc.private_subnets, 0)
 
   runner_ami_filter                       = var.runner_ami_filter
   runner_worker_docker_machine_ami_filter = var.runner_worker_docker_machine_ami_filter
@@ -147,9 +147,8 @@ module "runner-instance" {
   }
 
   runner_worker_docker_machine_instance = {
-    types      = var.runner_worker_docker_machine_instance_types
-    root_size  = var.runner_worker_docker_machine_instance_root_size
-    subnet_ids = var.runner_worker_docker_machine_instance_subnet_ids
+    types     = var.runner_worker_docker_machine_instance_types
+    root_size = var.runner_worker_docker_machine_instance_root_size
   }
 
   runner_networking = {

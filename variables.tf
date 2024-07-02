@@ -1,11 +1,13 @@
 variable "vpc_id" {
   description = "The VPC used for the runner and runner workers."
   type        = string
+  default     = null
 }
 
-variable "runner_worker_docker_machine_instance_subnet_ids" {
-  description = "The Subnets used for the runner workers."
-  type        = list(string)
+variable "subnet_id" {
+  description = "The subnet used for the runner and runner workers."
+  type        = string
+  default     = null
 }
 
 variable "aws_region" {

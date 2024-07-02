@@ -18,11 +18,11 @@ jobs:
     strategy:
       matrix:
         terraform: [ 1.6.1 ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: hashicorp/terraform:${{ matrix.terraform }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - run: terraform init -get -backend=false -input=false
       - run: terraform fmt -recursive -check=true -write=false
-      - run: terraform validate
+      - run: terraform validate --json

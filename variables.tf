@@ -86,6 +86,12 @@ variable "runner_worker_docker_machine_instance_types" {
   default     = ["t3.medium"]
 }
 
+variable "runner_manager_maximum_concurrent_jobs" {
+  description = "The number of maximum concurrent jobs allowed for an environment"
+  type        = number
+  default     = 10
+}
+
 variable "runner_instance_type" {
   description = "Runner Instance Type"
   type        = string

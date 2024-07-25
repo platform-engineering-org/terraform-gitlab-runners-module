@@ -69,6 +69,10 @@ module "runner-instance" {
   runner_worker_docker_machine_ami_filter = var.runner_worker_docker_machine_ami_filter
   runner_worker_docker_machine_ami_owners = var.runner_worker_docker_machine_ami_owners
 
+  runner_manager = {
+    maxiumum_concurrent_jobs = var.runner_manager_maximum_concurrent_jobs
+  }
+
   runner_gitlab_registration_config = {
     type              = "group"
     group_id          = var.gitlab_group_id

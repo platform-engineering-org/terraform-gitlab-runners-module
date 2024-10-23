@@ -86,6 +86,12 @@ variable "runner_worker_docker_machine_instance_types" {
   default     = ["t3.medium"]
 }
 
+variable "runner_worker_log_output_limit" {
+  description = "Gitlab runner job log limit (kilobytes)"
+  type        = number
+  default     = 20480
+}
+
 variable "runner_manager_maximum_concurrent_jobs" {
   description = "The number of maximum concurrent jobs allowed for an environment"
   type        = number

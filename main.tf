@@ -132,7 +132,8 @@ module "runner-instance" {
   }
 
   runner_worker = {
-    ssm_access = true
+    ssm_access   = true
+    output_limit = var.runner_worker_log_output_limit
   }
 
   runner_cloudwatch = {

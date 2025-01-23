@@ -10,6 +10,12 @@ variable "subnet_id" {
   default     = null
 }
 
+variable "sg_name" {
+  description = "The Security Group name used for the runner and runner workers."
+  type        = string
+  default     = null
+}
+
 variable "aws_region" {
   description = "AWS region."
   type        = string

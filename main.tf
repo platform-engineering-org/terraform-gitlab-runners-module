@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {
 }
 
 data "aws_security_group" "default" {
-  name   = "default"
+  name   = var.sg_name == null ? "default" : var.sg_name
   vpc_id = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
 }
 

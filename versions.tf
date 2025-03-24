@@ -2,11 +2,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.91.0"
+      version = "5.92.0"
     }
     gitlab = {
       source  = "gitlabhq/gitlab"
-      version = "17.9.0"
+      version = "17.10.0"
     }
     local = {
       source  = "hashicorp/local"

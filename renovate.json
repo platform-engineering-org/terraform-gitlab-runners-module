@@ -6,8 +6,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "variables.tf"
+      "managerFilePatterns": [
+        "/variables.tf/"
       ],
       "matchStrings": [
         "\\s*default\\s*=\\s*\"(?<currentValue>.*)\"\\s*//\\s*renovate:\\s*packageName=gitlab-org/gitlab-runner\\s*"

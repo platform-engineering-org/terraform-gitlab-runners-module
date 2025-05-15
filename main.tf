@@ -57,7 +57,7 @@ resource "random_id" "unique_prefix" {
 
 module "runner-instance" {
   source  = "cattle-ops/gitlab-runner/aws"
-  version = "9.2.0"
+  version = "8.1.0"
 
   environment       = var.environment
   iam_object_prefix = random_id.unique_prefix.hex

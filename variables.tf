@@ -156,3 +156,9 @@ variable "enable" {
   type        = bool
   default     = true
 }
+
+variable "runner_instance_spot_price" {
+  description = "By setting a spot price bid price the runner agent will be created via a spot request"
+  type        = string
+  default     = "on-demand-price"
+}

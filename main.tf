@@ -129,6 +129,7 @@ module "runner-instance" {
     name_prefix                 = "${var.runner_name}"
     ssm_access                  = true
     type                        = var.runner_instance_type
+    spot_price                  = var.runner_instance_spot_price
   }
 
   runner_worker = {

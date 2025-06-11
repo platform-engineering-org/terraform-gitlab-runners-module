@@ -21,9 +21,9 @@ variable "aws_profile" {
   default     = "default"
 }
 
-variable "token" {
+variable "preregistered_runner_token_ssm_parameter_name" {
+  description = "Name of the ssm parameter containing the runner registration token."
   type        = string
-  description = "Gitlab token"
   sensitive   = true
 }
 
@@ -55,12 +55,6 @@ variable "gitlab_url" {
   description = "URL of the gitlab instance to connect to."
   type        = string
   default     = "https://gitlab.com"
-}
-
-variable "access_token_secure_parameter_store_name" {
-  description = "Runner Gitlab Access Token SSM Parameter Name"
-  type        = string
-  sensitive   = true
 }
 
 variable "timezone" {

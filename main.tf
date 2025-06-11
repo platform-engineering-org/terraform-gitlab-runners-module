@@ -57,7 +57,7 @@ resource "random_id" "unique_prefix" {
 
 module "runner-instance" {
   source  = "cattle-ops/gitlab-runner/aws"
-  version = "8.1.0"
+  version = "9.2.2"
 
   environment       = var.environment
   iam_object_prefix = random_id.unique_prefix.hex
@@ -73,14 +73,25 @@ module "runner-instance" {
     maxiumum_concurrent_jobs = var.runner_manager_maximum_concurrent_jobs
   }
 
-  runner_gitlab_registration_config = {
-    type              = "group"
-    group_id          = var.gitlab_group_id
-    tag_list          = var.tag_list
-    description       = "Docker Machine"
-    locked_to_project = "true"
-    run_untagged      = "false"
-    maximum_timeout   = "3600"
+  # allow all outgoing traffic
+  runner_egress_rules = {
+    allow_all = {
+      description = "Allow all egress traffic"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    }
+  }
+
+  runner_worker_egress_rules = {
+    allow_all = {
+      description = "Allow all egress traffic"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    }
   }
 
   runner_worker_cache = {
@@ -143,9 +154,9 @@ module "runner-instance" {
   }
 
   runner_gitlab = {
-    url                                      = var.gitlab_url
-    runner_version                           = var.runner_version
-    access_token_secure_parameter_store_name = var.access_token_secure_parameter_store_name
+    url                                           = var.gitlab_url
+    runner_version                                = var.runner_version
+    preregistered_runner_token_ssm_parameter_name = var.preregistered_runner_token_ssm_parameter_name
   }
 
   runner_worker_docker_machine_instance_spot = {
@@ -162,7 +173,6 @@ module "runner-instance" {
     allow_incoming_ping_security_group_ids = [data.aws_security_group.default.id]
   }
 
-  runner_gitlab_token_secure_parameter_store = "runner-token"
-  runner_sentry_secure_parameter_store_name  = "sentry-dsn"
-  runner_terminate_ec2_lifecycle_hook_name   = "terminate-instances"
+  runner_sentry_secure_parameter_store_name = "sentry-dsn"
+  runner_terminate_ec2_lifecycle_hook_name  = "terminate-instances"
 }

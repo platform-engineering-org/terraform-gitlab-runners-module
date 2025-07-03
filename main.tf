@@ -9,7 +9,7 @@ data "aws_security_group" "default" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.21.0"
+  version = "6.0.1"
 
   name = "vpc-${var.environment}"
   cidr = "10.0.0.0/16"
@@ -33,7 +33,7 @@ module "vpc" {
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "5.21.0"
+  version = "6.0.1"
 
   vpc_id = var.vpc_id == null ? module.vpc.vpc_id : var.vpc_id
 

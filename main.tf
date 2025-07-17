@@ -77,8 +77,8 @@ module "runner-instance" {
   runner_egress_rules = {
     allow_all = {
       description = "Allow all egress traffic"
-      from_port   = 0
-      to_port     = 0
+      from_port   = "-1"
+      to_port     = "-1"
       protocol    = "-1"
       cidr_block  = "0.0.0.0/0"
     }
@@ -87,8 +87,8 @@ module "runner-instance" {
   runner_worker_egress_rules = {
     allow_all = {
       description = "Allow all egress traffic"
-      from_port   = 0
-      to_port     = 0
+      from_port   = "-1"
+      to_port     = "-1"
       protocol    = "-1"
       cidr_block  = "0.0.0.0/0"
     }

@@ -131,7 +131,7 @@ variable "runner_worker_docker_machine_instance_root_size" {
 variable "runner_version" {
   description = "Gitlab runner version"
   type        = string
-  default     = "18.1.1" // renovate: packageName=gitlab-org/gitlab-runner
+  default     = "18.2.0" // renovate: packageName=gitlab-org/gitlab-runner
 }
 
 variable "gitlab_group_id" {

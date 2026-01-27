@@ -70,7 +70,7 @@ module "runner-instance" {
   runner_worker_docker_machine_ami_owners = var.runner_worker_docker_machine_ami_owners
 
   runner_manager = {
-    maxiumum_concurrent_jobs = var.runner_manager_maximum_concurrent_jobs
+    maximum_concurrent_jobs = var.runner_manager_maximum_concurrent_jobs
   }
 
   # allow all outgoing traffic

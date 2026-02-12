@@ -173,6 +173,17 @@ module "runner-instance" {
     allow_incoming_ping_security_group_ids = [data.aws_security_group.default.id]
   }
 
+  # Allow lambda function to reach AWS APIs and external services
+  runner_terminate_ec2_lambda_egress_rules = {
+    allow_all = {
+      description = "Allow all egress traffic"
+      from_port   = -1
+      to_port     = -1
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    }
+  }
+
   runner_sentry_secure_parameter_store_name = "sentry-dsn"
   runner_terminate_ec2_lifecycle_hook_name  = "terminate-instances"
 }

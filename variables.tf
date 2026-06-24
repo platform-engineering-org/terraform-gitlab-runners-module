@@ -112,7 +112,7 @@ variable "runner_worker_docker_machine_ami_filter" {
   type        = map(list(string))
 
   default = {
-    name = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    name = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 }
 
